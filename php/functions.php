@@ -10,13 +10,11 @@ function selectPersonByDNA($link,$DNA){
         $person['position']=mb_convert_encoding($row['position'], 'UTF-8', 'UTF-8');
         $person['description']=mb_convert_encoding($row['description'], 'UTF-8', 'UTF-8');
         $person['picture']=mb_convert_encoding($row['picture'], 'UTF-8', 'UTF-8');
-        $person['DNA_title']=mb_convert_encoding($row['DNA_title'], 'UTF-8', 'UTF-8');
-        $person['DNA_picture']=mb_convert_encoding($row['DNA_picture'], 'UTF-8', 'UTF-8');
-        $person['DNA_description']=mb_convert_encoding($row['DNA_description'], 'UTF-8', 'UTF-8');
         return $person;
     }
     return "none exist";
 }
+
 function selectPersonByName($link,$name){
     $sql = "CALL alpha.selectPersonByName('$name')";
     $result=mysqli_query($link,$sql);
@@ -27,13 +25,11 @@ function selectPersonByName($link,$name){
         $person['position']=mb_convert_encoding($row['position'], 'UTF-8', 'UTF-8');
         $person['description']=mb_convert_encoding($row['description'], 'UTF-8', 'UTF-8');
         $person['picture']=mb_convert_encoding($row['picture'], 'UTF-8', 'UTF-8');
-        $person['DNA_title']=mb_convert_encoding($row['DNA_title'], 'UTF-8', 'UTF-8');
-        $person['DNA_picture']=mb_convert_encoding($row['DNA_picture'], 'UTF-8', 'UTF-8');
-        $person['DNA_description']=mb_convert_encoding($row['DNA_description'], 'UTF-8', 'UTF-8');
         return $person;
     }
     return "none exist";
 }
+
 function selectPersonByPrint($link,$print){
     $sql = "CALL alpha.selectPersonByPrint('$print')";
     $result=mysqli_query($link,$sql);
@@ -44,10 +40,6 @@ function selectPersonByPrint($link,$print){
         $person['position']=mb_convert_encoding($row['position'], 'UTF-8', 'UTF-8');
         $person['description']=mb_convert_encoding($row['description'], 'UTF-8', 'UTF-8');
         $person['picture']=mb_convert_encoding($row['picture'], 'UTF-8', 'UTF-8');
-        $person['DNA_title']=mb_convert_encoding($row['DNA_title'], 'UTF-8', 'UTF-8');
-        $person['DNA_picture']=mb_convert_encoding($row['DNA_picture'], 'UTF-8', 'UTF-8');
-        $person['DNA_description']=mb_convert_encoding($row['DNA_description'], 'UTF-8', 'UTF-8');
-        $person['title']=mb_convert_encoding($row['title'], 'UTF-8', 'UTF-8');
         return $person;
     }
     return "none exist";
@@ -56,7 +48,6 @@ function selectPersonByPrint($link,$print){
 function selectUserByEmail($link,$email){
     $sql = "CALL alpha.selectUserByEmail('$email')";
     $result=mysqli_query($link,$sql);
-    
     if (mysqli_num_rows($result) > 0){
         return "exist";
     }
@@ -69,13 +60,14 @@ function selectUserByEmailAndPass($link,$email,$pass){
     if (mysqli_num_rows($result) > 0){
         $row=mysqli_fetch_array($result);
         $user['id_user']=mb_convert_encoding($row['id_user'], 'UTF-8', 'UTF-8');
+        $user['money']=mb_convert_encoding($row['money'], 'UTF-8', 'UTF-8');
         return $user;
     }
     return "none exist";
 }
 
 function selectReportById($link,$id){
-    $sql = "CALL alpha.selectRepordById($id)";
+    $sql = "CALL alpha.selectReportById($id)";
     $result=mysqli_query($link,$sql);
     if (mysqli_num_rows($result) > 0){
         $row=mysqli_fetch_array($result);
@@ -89,14 +81,17 @@ function selectReportById($link,$id){
 function selectNoteByIdUser($link,$id){
     $sql = "CALL alpha.selectNoteByIdUser($id)";
     $result=mysqli_query($link,$sql);
+    $counter=0;
     if (mysqli_num_rows($result) > 0){
         while ($row=mysqli_fetch_array($result)){
            $note['id_note']=mb_convert_encoding($row['id_note'], 'UTF-8', 'UTF-8');
            $note['title']=mb_convert_encoding($row['title'], 'UTF-8', 'UTF-8');
            $note['text_note'] =mb_convert_encoding($row['text_note'], 'UTF-8', 'UTF-8');
            $note['date_note']=mb_convert_encoding($row['date_note'], 'UTF-8', 'UTF-8');
+           $notes[$counter]=json_encode($note);
+           $counter=$counter+1;
         }
-        return $note;
+        return $notes;
     }
     return "none exist";
 }
@@ -117,22 +112,53 @@ function selectExamByIdExam($link,$idEx){
 
 function insertNoteById($link,$title,$text,$id){
     $sql = "CALL alpha.insertNoteById('$title','$text',$id)";
-    for(; mysqli_next_result($link) == 0;)
-    mysqli_query($link,$sql);
     mysqli_query($link,$sql);
 }
 
 function insertNewUser($link,$login,$pass){
     $sql = "CALL alpha.insertNewUser('$login','$pass')";
-    for(; mysqli_next_result($link) == 0;)
-    mysqli_query($link,$sql);
     mysqli_query($link,$sql);
 }
 
 function deleteNoteById($link,$id){
     $sql = "CALL alpha.deleteNoteById($id)";
-    for(; mysqli_next_result($link) == 0;)
-    mysqli_query($link,$sql);
     mysqli_query($link,$sql);
 }
+
+function updateUserPassword($link,$iduser,$pass){
+    $sql="call alpha.updateUserPassword($iduser,'$pass');";
+    mysqli_query($link,$sql);
+}
+
+function switchTypeCodeAndNextOperation($link, $idUser, $code){
+    $sql="call alpha.switchTypeCodeAndNextOperation('$idUser,'$code');";
+    $result=mysqli_query($link,$sql);
+    if (mysqli_num_rows($result) > 0){
+        $row=mysqli_fetch_array($result);
+        $type=mb_convert_encoding($row['type'], 'UTF-8', 'UTF-8');
+        if ($type =="money"){
+            $result['money']=mb_convert_encoding($row['money'], 'UTF-8', 'UTF-8');
+        }
+        if ($type =="alert"){
+            $result["alert"]=mb_convert_encoding($row['alert'], 'UTF-8', 'UTF-8');
+        }
+        if ($type =="game"){
+            $result["link"]=mb_convert_encoding($row['link'], 'UTF-8', 'UTF-8');
+        }
+        if ($type =="report"){
+            $result['document']=mb_convert_encoding($row['document'], 'UTF-8', 'UTF-8');
+            $result['person_name']=mb_convert_encoding($row['person_name'], 'UTF-8', 'UTF-8');
+        }
+        if ($type =="exam"){
+            $result['title']=mb_convert_encoding($row['title'], 'UTF-8', 'UTF-8');
+            $result['audio']=mb_convert_encoding($row['audio'], 'UTF-8', 'UTF-8');
+            $result['description']=mb_convert_encoding($row['description'], 'UTF-8', 'UTF-8');
+            $result['person_name']=mb_convert_encoding($row['person_name'], 'UTF-8', 'UTF-8');
+        }
+        return $result;
+    }
+    return "none exist";
+}
+
 ?>
+
