@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListNoteActivity"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="192dp">
+
+        <LinearLayout
+            android:id="@+id/topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="129dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/titleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:background="@color/title">
+
+                <ImageView
+                    android:id="@+id/btn_note"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/notesselect" />
+
+                <TextView
+                    android:id="@+id/text_currentPage"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/notes"
+                    android:textColor="@color/mainText"
+                    android:textSize="24sp"
+                    app:fontFamily="@font/my_font" />
+
+                <ImageView
+                    android:id="@+id/btn_logout"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onProfileClick"
+                    app:srcCompat="@drawable/logout" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/moneyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:background="@color/btnHead"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/diceLeft"
+                    android:layout_width="224dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onDiceClick"
+                    app:srcCompat="@drawable/diceleft" />
+
+                <TextView
+                    android:id="@+id/money"
+                    android:layout_width="244dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:autoText="false"
+                    android:gravity="center"
+                    android:text="30$"
+                    android:textColor="@color/mainText"
+                    android:textSize="30sp"
+                    app:fontFamily="@font/my_font" />
+
+                <ImageView
+                    android:id="@+id/dicerigth"
+                    android:layout_width="221dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onDiceClick"
+                    app:srcCompat="@drawable/diceright" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/btnHead"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/btn_prints"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="onSignaturesClick"
+                    app:srcCompat="@drawable/signatury" />
+
+                <ImageView
+                    android:id="@+id/btn_persons"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="onPersonsClick"
+                    app:srcCompat="@drawable/lichnosti" />
+
+                <ImageView
+                    android:id="@+id/btn_codes"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onCodesClick"
+                    app:srcCompat="@drawable/codes" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:isScrollContainer="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/btnNote"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/searchLine"
+                android:onClick="onNewNoteClick"
+                app:srcCompat="@drawable/newnote" />
+
+            <ListView
+                android:id="@+id/noteList"
+                android:layout_width="match_parent"
+                android:layout_height="181dp"
+                android:background="@color/searchLine">
+
+            </ListView>
+
+            <LinearLayout
+                android:id="@+id/detailedNote"
+                android:layout_width="match_parent"
+                android:layout_height="284dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/searchLine"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/titleNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/mainText"
+                    android:textSize="30sp"
+                    app:fontFamily="@font/my_font" />
+
+                <TextView
+                    android:id="@+id/dateNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="right"
+                    android:textColor="@color/mainText"
+                    android:textSize="20sp"
+                    android:visibility="visible"
+                    app:fontFamily="@font/my_font" />
+
+                <EditText
+                    android:id="@+id/textNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="93dp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:singleLine="false"
+                    android:textColor="@color/mainText"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/my_font"/>
+
+                <LinearLayout
+                    android:id="@+id/butNoteSel"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/btndel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="onDeleteClick"
+                        app:srcCompat="@drawable/delete" />
+
+                    <ImageView
+                        android:id="@+id/btnedit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="onEditClick"
+                        app:srcCompat="@drawable/edit" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/butNewNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/btnBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="onMyBackClick"
+                        app:srcCompat="@drawable/back" />
+
+                    <ImageView
+                        android:id="@+id/btnSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="onSaveClick"
+                        app:srcCompat="@drawable/save" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

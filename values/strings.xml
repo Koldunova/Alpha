@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Alpha</string>
+    <string name="titlePageDB">Codes</string>
+    <string name="titlePagePrints">Signatures</string>
+    <string name="titlePagePeople">Persons</string>
+    <string name="authorisation">Authorization</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="passwordRep">Repeat password</string>
+    <string name="registration">Registration</string>
+    <string name="code">Code</string>
+    <string name="resultTextDef">Please focus camera to QR code</string>
+    <string name="descriptionPerson">описание</string>
+    <string name="hinPersonName">Person name</string>
+    <string name="noMatches">No matches found</string>
+    <string name="valueMoney">$</string>
+    <string name="unknownCode">Unknown code</string>
+    <string name="noMoney">Your cash account has not changed, maybe you do not have enough funds.</string>
+    <string name="cashChanged">Your cash account has changed.</string>
+    <string name="enterCorrectCode">Enter correct or exist code</string>
+    <string name="enterCode">Please, enter code.</string>
+    <string name="notes">Notes</string>
+    <string name="profile">Profile</string>
+    <string name="random">Random</string>
+</resources>

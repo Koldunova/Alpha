@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#855326</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="mainText">#99fFFFFF</color>
+    <color name="title">#855326</color>
+    <color name="btnHead">#A8B17037</color>
+
+    <color name="btnRegAuth">#8FB17037</color>
+    <color name="inputRegAuth">#C38B572C</color>
+
+    <color name="backPersonInf">#A38C5F39</color>
+
+    <color name="searchLine">#908C5F39</color>
+</resources>
