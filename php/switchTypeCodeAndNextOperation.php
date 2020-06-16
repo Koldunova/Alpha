@@ -5,7 +5,7 @@
     $idUser=$_REQUEST[id];
     $code=$_REQUEST[code]; 
 
-    $codeResult=switchTypeCodeAndNextOperation($link,$id,$code);
+    $codeResult=switchTypeCodeAndNextOperation($link,$idUser,$code);
 
     echo(json_encode($codeResult));
 

@@ -131,33 +131,39 @@ function updateUserPassword($link,$iduser,$pass){
 }
 
 function switchTypeCodeAndNextOperation($link, $idUser, $code){
-    $sql="call alpha.switchTypeCodeAndNextOperation('$idUser,'$code');";
+    $sql="call alpha.switchTypeCodeAndNextOperation($idUser,$code);";
     $result=mysqli_query($link,$sql);
     if (mysqli_num_rows($result) > 0){
         $row=mysqli_fetch_array($result);
         $type=mb_convert_encoding($row['type'], 'UTF-8', 'UTF-8');
-        if ($type =="money"){
-            $result['money']=mb_convert_encoding($row['money'], 'UTF-8', 'UTF-8');
+        if (strcasecmp($type,"money")==0){
+            $result1['money']=mb_convert_encoding($row['money'], 'UTF-8', 'UTF-8');
         }
-        if ($type =="alert"){
-            $result["alert"]=mb_convert_encoding($row['alert'], 'UTF-8', 'UTF-8');
+        if (strcasecmp($type,"alert")==0){
+            $result1["alert"]=mb_convert_encoding($row['text'], 'UTF-8', 'UTF-8');
         }
-        if ($type =="game"){
-            $result["link"]=mb_convert_encoding($row['link'], 'UTF-8', 'UTF-8');
+        if (strcasecmp($type,"game")==0){
+            $result1["link"]=mb_convert_encoding($row['link'], 'UTF-8', 'UTF-8');
         }
-        if ($type =="report"){
-            $result['document']=mb_convert_encoding($row['document'], 'UTF-8', 'UTF-8');
-            $result['person_name']=mb_convert_encoding($row['person_name'], 'UTF-8', 'UTF-8');
+        if (strcasecmp($type,"report")==0){
+            $result1['document']=mb_convert_encoding($row['document'], 'UTF-8', 'UTF-8');
+            $result1['person_name']=mb_convert_encoding($row['person_name'], 'UTF-8', 'UTF-8');
         }
-        if ($type =="exam"){
-            $result['title']=mb_convert_encoding($row['title'], 'UTF-8', 'UTF-8');
-            $result['audio']=mb_convert_encoding($row['audio'], 'UTF-8', 'UTF-8');
-            $result['description']=mb_convert_encoding($row['description'], 'UTF-8', 'UTF-8');
-            $result['person_name']=mb_convert_encoding($row['person_name'], 'UTF-8', 'UTF-8');
+        if (strcasecmp($type,"exam")==0){
+            $result1['title']=mb_convert_encoding($row['title'], 'UTF-8', 'UTF-8');
+            $result1['audio']=mb_convert_encoding($row['audio'], 'UTF-8', 'UTF-8');
+            $result1['description']=mb_convert_encoding($row['description'], 'UTF-8', 'UTF-8');
+            $result1['person_name']=mb_convert_encoding($row['person_name'], 'UTF-8', 'UTF-8');
         }
-        return $result;
+        $result1["type"]=$type;
+        return $result1;
     }
     return "none exist";
+}
+
+function updateNoteById($link,$idNote, $title, $text){
+    $sql = "call alpha.updateNoteById($idNote, '$title', '$text');";
+    mysqli_query($link,$sql);
 }
 
 ?>
