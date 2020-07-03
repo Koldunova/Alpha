@@ -7,7 +7,9 @@ Implemented the ability to create custom notes.
 The code approach is also used to get endings, dialogs, messages and for money management.
 
 Development environment: Android Studio, Eclipse, Visual Code
+
 Programming languages: Java, Php
+
 Database: MySql
 
 
